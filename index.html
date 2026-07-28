@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Developer & Not Only | Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ivory: #FFFFF0;
+            --deep-blue: #1B2A4A;
+            --gold: #C5A059;
+            --gold-light: #D4B76E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--ivory);
+            color: var(--deep-blue);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 240, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(27, 42, 74, 0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--deep-blue);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 2px;
+            background: var(--deep-blue);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 5% 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1200px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--deep-blue);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-subtext {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: var(--gold);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero-traits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.4s forwards;
+        }
+
+        .trait {
+            padding: 1rem 2rem;
+            border: 2px solid var(--deep-blue);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trait::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--deep-blue);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        .trait span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .trait:hover {
+            color: var(--ivory);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(27, 42, 74, 0.3);
+        }
+
+        .trait:hover::before {
+            transform: translateY(0);
+        }
+
+        /* Marquee Section */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 2rem 0;
+            background: var(--deep-blue);
+            position: relative;
+        }
+
+        .marquee {
+            display: flex;
+            width: fit-content;
+            animation: marquee 20s linear infinite;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 4rem;
+            padding: 0 2rem;
+            white-space: nowrap;
+        }
+
+        .marquee-item {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--ivory);
+            font-weight: 500;
+        }
+
+        .marquee-item.gold {
+            color: var(--gold);
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 1rem;
+            color: var(--deep-blue);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--gold);
+            max-width: 600px;
+        }
+
+        /* Jobs to Target Section */
+        .jobs-section {
+            background: var(--deep-blue);
+            color: var(--ivory);
+            overflow: hidden;
+        }
+
+        .jobs-section .section-header h2 {
+            color: var(--ivory);
+        }
+
+        .jobs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .job-item {
+            padding: 2rem;
+            background: rgba(255, 255, 240, 0.05);
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+            font-size: 1.3rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .job-item:hover {
+            background: rgba(197, 160, 89, 0.2);
+            padding-left: 3rem;
+            transform: translateX(10px);
+        }
+
+        .job-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background: var(--ivory);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            padding: 1.8rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(27, 42, 74, 0.08);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            border: 2px solid transparent;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(27, 42, 74, 0.15);
+            border-color: var(--gold);
+        }
+
+        .skill-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Work Section */
+        .work-section {
+            background: linear-gradient(135deg, var(--ivory) 0%, #f5f5e8 100%);
+        }
+
+        .projects-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .project-card {
+            position: relative;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(27, 42, 74, 0.1);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(27, 42, 74, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .project-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-weight: 700;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--deep-blue);
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: var(--deep-blue);
+            color: var(--ivory);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(27, 42, 74, 0.95);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 60px 5%;
+        }
+
+        .modal.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--ivory);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--deep-blue);
+            color: var(--ivory);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: var(--gold);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 3rem;
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--deep-blue);
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--deep-blue);
+        }
+
+        .modal-media {
+            margin: 2rem 0;
+        }
+
+        .modal-media img,
+        .modal-media video {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--gold);
+            color: var(--deep-blue);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .modal-link:hover {
+            background: var(--deep-blue);
+            color: var(--ivory);
+            transform: translateY(-3px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--deep-blue);
+            color: var(--ivory);
+        }
+
+        .faq-section .section-header h2 {
+            color: var(--ivory);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 240, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .faq-question {
+            padding: 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(197, 160, 89, 0.1);
+        }
+
+        .faq-icon {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-icon::before,
+        .faq-icon::after {
+            content: '';
+            position: absolute;
+            background: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .faq-icon::before {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .faq-icon::after {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 2rem 2rem;
+        }
+
+        .faq-answer p {
+            line-height: 1.8;
+            color: rgba(255, 255, 240, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-blue);
+            color: var(--ivory);
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        footer p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-traits {
+                gap: 1rem;
+            }
+
+            .trait {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .marquee-item {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .project-image {
+                height: 250px;
+            }
+
+            .modal-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.8rem;
+            }
+
+            .faq-question {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--ivory);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--deep-blue);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">Portfolio.</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#jobs">Jobs to Target</a></li>
+            <li><a href="#work">My Work</a></li>
+            <li><a href="#skills">My Skills</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <div class="mobile-menu" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>SHOPIFY DEVELOPER<br>AND NOT ONLY</h1>
+            <p class="hero-subtext">Shopify is just the foundation. I build ecosystems on it.</p>
+            <div class="hero-traits">
+                <div class="trait"><span>Creative</span></div>
+                <div class="trait"><span>Reliable</span></div>
+                <div class="trait"><span>Strategist</span></div>
+                <div class="trait"><span>Builder</span></div>
+                <div class="trait"><span>Efficient</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span class="marquee-item">SHOPIFY DEVELOPER</span>
+                <span class="marquee-item gold">UX / UI</span>
+                <span class="marquee-item">LIQUID</span>
+                <span class="marquee-item gold">HTML/CSS</span>
+                <span class="marquee-item">THEME CUSTOMIZATION</span>
+                <span class="marquee-item gold">SHOPIFY DEVELOPER</span>
+                <span class="marquee-item">UX / UI</span>
+                <span class="marquee-item gold">LIQUID</span>
+                <span class="marquee-item">HTML/CSS</span>
+                <span class="marquee-item gold">THEME CUSTOMIZATION</span>
+            </div>
+            <div class="marquee-content">
+                <span class="marquee-item">SHOPIFY DEVELOPER</span>
+                <span class="marquee-item gold">UX / UI</span>
+                <span class="marquee-item">LIQUID</span>
+                <span class="marquee-item gold">HTML/CSS</span>
+                <span class="marquee-item">THEME CUSTOMIZATION</span>
+                <span class="marquee-item gold">SHOPIFY DEVELOPER</span>
+                <span class="marquee-item">UX / UI</span>
+                <span class="marquee-item gold">LIQUID</span>
+                <span class="marquee-item">HTML/CSS</span>
+                <span class="marquee-item gold">THEME CUSTOMIZATION</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jobs to Target Section -->
+    <section class="jobs-section" id="jobs">
+        <div class="section-header">
+            <h2>Jobs to Target</h2>
+            <p>Specialized roles where I deliver exceptional results</p>
+        </div>
+        <div class="jobs-list">
+            <div class="job-item">• Shopify Developer</div>
+            <div class="job-item">• Shopify Frontend Developer</div>
+            <div class="job-item">• Shopify Theme Customization</div>
+            <div class="job-item">• Shopify UI/UX Designer</div>
+            <div class="job-item">• Shopify Landing Page Developer</div>
+            <div class="job-item">• Shopify Store Optimization</div>
+            <div class="job-item">• Shopify Design & Development</div>
+        </div>
+    </section>
+
+    <!-- My Work Section -->
+    <section class="work-section" id="work">
+        <div class="section-header">
+            <h2>My Work</h2>
+            <p>Selected projects showcasing my expertise</p>
+        </div>
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card" onclick="openModal('modal1')">
+                <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_125203.png?v=1785228910" alt="Luxury Furniture Store" class="project-image">
+                <div class="project-info">
+                    <span class="project-number">01</span>
+                    <h3 class="project-title">Full Shopify Store Development | Luxury Furniture & Home Decor</h3>
+                    <div class="project-tags">
+                        <span class="tag">Shopify</span>
+                        <span class="tag">Liquid</span>
+                        <span class="tag">UX/UI</span>
+                        <span class="tag">Branding</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card" onclick="openModal('modal2')">
+                <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_133305.png?v=1785231498" alt="Landing Page" class="project-image">
+                <div class="project-info">
+                    <span class="project-number">02</span>
+                    <h3 class="project-title">Shopify Landing Page Design & Development | Conversion-Focused Campaign</h3>
+                    <div class="project-tags">
+                        <span class="tag">Landing Page</span>
+                        <span class="tag">Conversion</span>
+                        <span class="tag">Responsive</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card" onclick="openModal('modal3')">
+                <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_135924.png?v=1785232889" alt="GitHub Pages Site" class="project-image">
+                <div class="project-info">
+                    <span class="project-number">03</span>
+                    <h3 class="project-title">HTML/CSS Website Development | GitHub Pages</h3>
+                    <div class="project-tags">
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">Responsive</span>
+                        <span class="tag">GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Skills Section -->
+    <section class="skills-section" id="skills">
+        <div class="section-header">
+            <h2>My Skills</h2>
+            <p>Technical expertise and creative capabilities</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-item">• Shopify Theme Customization</div>
+            <div class="skill-item">• Liquid (Shopify)</div>
+            <div class="skill-item">• HTML5 & CSS3</div>
+            <div class="skill-item">• Basic JavaScript</div>
+            <div class="skill-item">• UI/UX Design</div>
+            <div class="skill-item">• Figma</div>
+            <div class="skill-item">• Wireframing & Prototyping</div>
+            <div class="skill-item">• Responsive Web Design</div>
+            <div class="skill-item">• Shopify Sections & Snippets</div>
+            <div class="skill-item">• Product Page Optimization</div>
+            <div class="skill-item">• Landing Page Development</div>
+            <div class="skill-item">• GitHub</div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Everything you need to know about working together</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What's the process from start to launch?</span>
+                    <div class="faq-icon"></div>
+                </div>
+                <div class="faq-answer">
+                    <p>It starts with a conversation about your goals, timeline, and what success looks like. From there I put together a clear scope and plan. Once we align, I build in stages and share progress as I go so nothing drifts and feedback stays easy. The goal is always a smooth handoff with a site you actually know how to use.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Whatever is included in your job?</span>
+                    <div class="faq-icon"></div>
+                </div>
+                <div class="faq-answer">
+                    <p>My work includes Shopify theme customization, custom sections, product page improvements, and responsive layouts using Liquid, HTML, and CSS. I combine technical implementation with UI/UX principles to create clean, user-friendly shopping experiences.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Are you open to discussing new and fresh ideas?</span>
+                    <div class="faq-icon"></div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, I not only take into account my client's thoughts and wishes, but I also conduct a complete UX research.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Shopify Developer Portfolio. All rights reserved.</p>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Modal 1 -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title">Full Shopify Store Development | Luxury Furniture & Home Decor</h2>
+                <p class="modal-description">
+                    This project showcases a complete Shopify store that I built independently from the ground up—from planning and branding to development, customization, and launch.
+                </p>
+                <p class="modal-description">
+                    Working closely with the client, I first conducted a comprehensive UX analysis to understand the target audience and customer journey. Based on the research, we carried out a complete brand transformation, including redesigning the logo, creating a new color palette, selecting typography, and establishing a consistent visual identity.
+                </p>
+                <p class="modal-description">
+                    I designed and developed the entire website, including the Home page, Collections, Product pages, About Us, Contact, FAQ, Shipping & Delivery, and Inspiration pages. I also created custom Shopify Liquid sections, responsive layouts, collection carousels, promotional banners, multilingual support, sticky navigation, product recommendations, and mobile-optimized user interfaces.
+                </p>
+                <p class="modal-description">
+                    Every section of the store was strategically designed to increase conversions, improve product discovery, and create a seamless shopping experience. The foundation of the design is user comfort—making navigation intuitive, highlighting products effectively, and strengthening the brand's premium identity across all devices.
+                </p>
+                <p class="modal-description">
+                    This project demonstrates my ability to deliver a complete Shopify solution, combining UX thinking, branding, custom development, and conversion-focused design into a cohesive online store.
+                </p>
+                <div class="modal-media">
+                    <video controls>
+                        <source src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_131815.png?v=1785230559" type="video/mp4">
+                    </video>
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_131815.png?v=1785230559" alt="Project Image 1">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_131732.png?v=1785230558" alt="Project Image 2">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_131721.png?v=1785230558" alt="Project Image 3">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_131905.png?v=1785230558" alt="Project Image 4">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/IMG_5510_d25fcdc3-aa6a-4dc4-be85-1b8c9a81e74d.jpg?v=1785230927" alt="Project Image 5">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/IMG_5515.jpg?v=1785230926" alt="Project Image 6">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/IMG_5512.jpg?v=1785230926" alt="Project Image 7">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/IMG_5514.jpg?v=1785230926" alt="Project Image 8">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/IMG_5513.jpg?v=1785230926" alt="Project Image 9">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/IMG_5511.jpg?v=1785230926" alt="Project Image 10">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal2')">&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title">Shopify Landing Page Design & Development | Conversion-Focused Campaign</h2>
+                <p class="modal-description">
+                    Designed and developed a modern Shopify landing page built to maximize conversions for a promotional marketing campaign.
+                </p>
+                <p class="modal-description">
+                    The page was structured with a clear customer journey, including a compelling hero banner, promotional offers, featured products, trust-building content, benefits section, call-to-action blocks, customer testimonials, and a responsive footer. Every section was carefully positioned to keep visitors engaged and encourage them to take action.
+                </p>
+                <p class="modal-description">
+                    The design follows a clean, premium, and mobile-first approach with strong visual hierarchy, consistent branding, elegant typography, and optimized spacing for an intuitive user experience across all devices.
+                </p>
+                <p class="modal-description">
+                    This landing page helps businesses increase campaign performance by presenting products in a clear, engaging way while reducing distractions and guiding customers towards purchase. It demonstrates my ability to combine Shopify development, UX principles, and conversion-focused design to create high-performing landing pages.
+                </p>
+                <div class="modal-media">
+                    <video controls>
+                        <source src="https://cdn.shopify.com/videos/c/o/v/b5ce07a1e37f45ecb3844e041e0c1627.mp4" type="video/mp4">
+                    </video>
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_133315.png?v=1785231498" alt="Landing Page Image 1">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_133305.png?v=1785231498" alt="Landing Page Image 2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal3')">&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title">HTML/CSS Website Development | GitHub Pages</h2>
+                <p class="modal-description">
+                    Designed and developed a responsive website using HTML and CSS, then deployed it with GitHub Pages for fast and reliable online hosting.
+                </p>
+                <p class="modal-description">
+                    The project includes a modern homepage with well-structured content sections, responsive layouts, clear navigation, and a clean visual design focused on usability and accessibility. The website was built with organized, maintainable code and optimized for both desktop and mobile devices.
+                </p>
+                <p class="modal-description">
+                    Through this project, I strengthened my understanding of front-end web development, responsive design, website structure, and version control using Git and GitHub. It also improved my ability to turn design concepts into fully functional websites.
+                </p>
+                <p class="modal-description">
+                    This type of website is ideal for personal brands, portfolios, small businesses, or startups looking for a professional online presence with a fast, lightweight, and easy-to-maintain solution.
+                </p>
+                <div class="modal-media">
+                    <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_135924.png?v=1785232889" alt="GitHub Pages Website">
+                </div>
+                <a href="https://ember-oak.github.io/Ember-Oak-/" target="_blank" class="modal-link">Visit Website →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Animate job items on scroll
+        gsap.utils.toArray('.job-item').forEach((item, i) => {
+            gsap.to(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: 'power2.out',
+                onComplete: () => item.classList.add('visible')
+            });
+        });
+
+        // Animate skill items on scroll
+        gsap.utils.toArray('.skill-item').forEach((item, i) => {
+            gsap.to(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                delay: i * 0.05,
+                ease: 'power2.out',
+                onComplete: () => item.classList.add('visible')
+            });
+        });
+
+        // Animate project cards on scroll
+        gsap.utils.toArray('.project-card').forEach((card, i) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: i * 0.2,
+                ease: 'power3.out',
+                onComplete: () => card.classList.add('visible')
+            });
+        });
+
+        // FAQ Accordion
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                hero.style.opacity = 1 - (scrolled / 700);
+            }
+        });
+    </script>
+</body>
+</html>
