@@ -13,9 +13,9 @@
         :root {
             --black: #000000;
             --ivory: #FFFFFF;
-            --red-primary: #FF3D00;
-            --red-secondary: #FF6B35;
-            --red-dark: #CC3300;
+            --midnight-blue: #1e1f26;
+            --midnight-blue-light: #2a2c35;
+            --midnight-blue-dark: #15161a;
             --gray: #888888;
         }
 
@@ -59,7 +59,7 @@
 
         nav.scrolled {
             padding: 1rem 5%;
-            box-shadow: 0 2px 20px rgba(255, 61, 0, 0.2);
+            box-shadow: 0 2px 20px rgba(30, 31, 38, 0.5);
         }
 
         .logo {
@@ -92,12 +92,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--red-primary);
+            background: var(--midnight-blue-light);
             transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--red-primary);
+            color: var(--midnight-blue-light);
         }
 
         .nav-links a:hover::after {
@@ -147,14 +147,14 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.7;
+            opacity: 0.5;
             mix-blend-mode: screen;
         }
 
         .blob-1 {
             width: 700px;
             height: 700px;
-            background: radial-gradient(circle, var(--red-primary) 0%, var(--red-dark) 50%, transparent 100%);
+            background: radial-gradient(circle, var(--midnight-blue) 0%, var(--midnight-blue-dark) 50%, transparent 100%);
             top: -200px;
             left: -200px;
             animation: fluidMove1 25s infinite ease-in-out;
@@ -163,7 +163,7 @@
         .blob-2 {
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, var(--red-secondary) 0%, var(--red-primary) 50%, transparent 100%);
+            background: radial-gradient(circle, var(--midnight-blue-light) 0%, var(--midnight-blue) 50%, transparent 100%);
             top: 40%;
             right: -150px;
             animation: fluidMove2 30s infinite ease-in-out;
@@ -172,7 +172,7 @@
         .blob-3 {
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, var(--red-dark) 0%, var(--red-primary) 60%, transparent 100%);
+            background: radial-gradient(circle, var(--midnight-blue-dark) 0%, var(--midnight-blue) 60%, transparent 100%);
             bottom: -100px;
             left: 30%;
             animation: fluidMove3 28s infinite ease-in-out;
@@ -181,7 +181,7 @@
         .blob-4 {
             width: 650px;
             height: 650px;
-            background: radial-gradient(circle, var(--red-secondary) 0%, var(--red-dark) 50%, transparent 100%);
+            background: radial-gradient(circle, var(--midnight-blue-light) 0%, var(--midnight-blue-dark) 50%, transparent 100%);
             top: 20%;
             left: 40%;
             animation: fluidMove4 35s infinite ease-in-out;
@@ -268,16 +268,18 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards;
+            text-align: center;
         }
 
         .hero-subtext {
             font-size: clamp(1.1rem, 2vw, 1.5rem);
-            color: var(--red-secondary);
+            color: var(--midnight-blue-light);
             margin-bottom: 3rem;
             font-weight: 400;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease 0.2s forwards;
+            text-align: center;
         }
 
         .hero-traits {
@@ -311,7 +313,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--red-primary);
+            background: var(--midnight-blue);
             transform: translateY(100%);
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 0;
@@ -325,8 +327,8 @@
         .trait:hover {
             color: var(--ivory);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 61, 0, 0.4);
-            border-color: var(--red-primary);
+            box-shadow: 0 10px 30px rgba(30, 31, 38, 0.6);
+            border-color: var(--midnight-blue-light);
         }
 
         .trait:hover::before {
@@ -364,8 +366,8 @@
             font-weight: 500;
         }
 
-        .marquee-item.red {
-            color: var(--red-primary);
+        .marquee-item.blue {
+            color: var(--midnight-blue-light);
         }
 
         @keyframes marquee {
@@ -379,25 +381,37 @@
 
         /* Section Styles */
         section {
-            padding: 100px 5%;
+            padding: 120px 5%;
             position: relative;
             background: var(--black);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-header {
             margin-bottom: 4rem;
+            text-align: center;
         }
 
         .section-header h2 {
             font-size: clamp(2rem, 4vw, 3.5rem);
             margin-bottom: 1rem;
             color: var(--ivory);
+            text-align: center;
         }
 
         .section-header p {
             font-size: 1.2rem;
-            color: var(--red-secondary);
+            color: var(--midnight-blue-light);
             max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         /* Jobs to Target Section */
@@ -412,12 +426,14 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .job-item {
             padding: 2rem;
             background: rgba(255, 255, 255, 0.05);
-            border-left: 4px solid var(--red-primary);
+            border-left: 4px solid var(--midnight-blue);
             border-radius: 8px;
             font-size: 1.3rem;
             font-weight: 500;
@@ -426,13 +442,15 @@
             opacity: 0;
             transform: translateX(-50px);
             color: var(--ivory);
+            text-align: center;
         }
 
         .job-item:hover {
-            background: rgba(255, 61, 0, 0.2);
+            background: rgba(30, 31, 38, 0.4);
             padding-left: 3rem;
             transform: translateX(10px);
-            box-shadow: 0 5px 20px rgba(255, 61, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(30, 31, 38, 0.5);
+            border-left-color: var(--midnight-blue-light);
         }
 
         .job-item.visible {
@@ -464,13 +482,14 @@
             transform: translateY(30px);
             border: 2px solid transparent;
             color: var(--ivory);
+            text-align: center;
         }
 
         .skill-item:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(255, 61, 0, 0.3);
-            border-color: var(--red-primary);
-            background: rgba(255, 61, 0, 0.1);
+            box-shadow: 0 12px 30px rgba(30, 31, 38, 0.5);
+            border-color: var(--midnight-blue);
+            background: rgba(30, 31, 38, 0.2);
         }
 
         .skill-item.visible {
@@ -509,8 +528,8 @@
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(255, 61, 0, 0.3);
-            border-color: var(--red-primary);
+            box-shadow: 0 20px 60px rgba(30, 31, 38, 0.6);
+            border-color: var(--midnight-blue);
         }
 
         .project-image {
@@ -527,12 +546,13 @@
         .project-info {
             padding: 2.5rem;
             position: relative;
+            text-align: center;
         }
 
         .project-number {
             font-family: 'Playfair Display', serif;
             font-size: 4rem;
-            color: var(--red-primary);
+            color: var(--midnight-blue);
             opacity: 0.4;
             position: absolute;
             top: 1rem;
@@ -544,17 +564,19 @@
             font-size: 1.8rem;
             margin-bottom: 1rem;
             color: var(--ivory);
+            text-align: center;
         }
 
         .project-tags {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .tag {
             padding: 0.5rem 1rem;
-            background: var(--red-primary);
+            background: var(--midnight-blue);
             color: var(--ivory);
             border-radius: 20px;
             font-size: 0.85rem;
@@ -587,8 +609,8 @@
             border-radius: 16px;
             overflow: hidden;
             position: relative;
-            border: 1px solid rgba(255, 61, 0, 0.3);
-            box-shadow: 0 0 60px rgba(255, 61, 0, 0.2);
+            border: 1px solid var(--midnight-blue);
+            box-shadow: 0 0 60px rgba(30, 31, 38, 0.5);
         }
 
         .modal-close {
@@ -597,7 +619,7 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background: var(--red-primary);
+            background: var(--midnight-blue);
             color: var(--ivory);
             border: none;
             border-radius: 50%;
@@ -624,6 +646,7 @@
             font-size: 2.5rem;
             margin-bottom: 2rem;
             color: var(--ivory);
+            text-align: center;
         }
 
         .modal-description {
@@ -632,6 +655,7 @@
             margin-bottom: 2rem;
             color: var(--ivory);
             opacity: 0.9;
+            text-align: center;
         }
 
         .modal-media {
@@ -649,7 +673,7 @@
         .modal-link {
             display: inline-block;
             padding: 1rem 2rem;
-            background: var(--red-primary);
+            background: var(--midnight-blue);
             color: var(--ivory);
             text-decoration: none;
             border-radius: 8px;
@@ -662,7 +686,7 @@
             background: var(--ivory);
             color: var(--black);
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 61, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(30, 31, 38, 0.6);
         }
 
         /* FAQ Section */
@@ -682,7 +706,7 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255, 61, 0, 0.3);
+            border: 1px solid var(--midnight-blue);
         }
 
         .faq-question {
@@ -698,7 +722,7 @@
         }
 
         .faq-question:hover {
-            background: rgba(255, 61, 0, 0.1);
+            background: rgba(30, 31, 38, 0.3);
         }
 
         .faq-icon {
@@ -712,7 +736,7 @@
         .faq-icon::after {
             content: '';
             position: absolute;
-            background: var(--red-primary);
+            background: var(--midnight-blue-light);
             transition: all 0.3s ease;
         }
 
@@ -751,6 +775,7 @@
             line-height: 1.8;
             color: var(--ivory);
             opacity: 0.9;
+            text-align: center;
         }
 
         /* Footer */
@@ -759,7 +784,7 @@
             color: var(--ivory);
             text-align: center;
             padding: 3rem 5%;
-            border-top: 1px solid rgba(255, 61, 0, 0.3);
+            border-top: 1px solid var(--midnight-blue);
         }
 
         footer p {
@@ -809,7 +834,7 @@
             }
 
             section {
-                padding: 60px 5%;
+                padding: 80px 5%;
             }
 
             .project-image {
@@ -844,12 +869,27 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--red-primary);
+            background: var(--midnight-blue);
             border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--red-secondary);
+            background: var(--midnight-blue-light);
+        }
+
+        /* Section divider animation */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--midnight-blue), transparent);
+            margin: 60px 0;
+            opacity: 0;
+            transform: scaleX(0);
+            transition: all 1s ease;
+        }
+
+        .section-divider.visible {
+            opacity: 1;
+            transform: scaleX(1);
         }
     </style>
 </head>
@@ -900,26 +940,26 @@
         <div class="marquee">
             <div class="marquee-content">
                 <span class="marquee-item">SHOPIFY DEVELOPER</span>
-                <span class="marquee-item red">UX / UI</span>
+                <span class="marquee-item blue">UX / UI</span>
                 <span class="marquee-item">LIQUID</span>
-                <span class="marquee-item red">HTML/CSS</span>
+                <span class="marquee-item blue">HTML/CSS</span>
                 <span class="marquee-item">THEME CUSTOMIZATION</span>
                 <span class="marquee-item">SHOPIFY DEVELOPER</span>
-                <span class="marquee-item red">UX / UI</span>
+                <span class="marquee-item blue">UX / UI</span>
                 <span class="marquee-item">LIQUID</span>
-                <span class="marquee-item red">HTML/CSS</span>
+                <span class="marquee-item blue">HTML/CSS</span>
                 <span class="marquee-item">THEME CUSTOMIZATION</span>
             </div>
             <div class="marquee-content">
                 <span class="marquee-item">SHOPIFY DEVELOPER</span>
-                <span class="marquee-item red">UX / UI</span>
+                <span class="marquee-item blue">UX / UI</span>
                 <span class="marquee-item">LIQUID</span>
-                <span class="marquee-item red">HTML/CSS</span>
+                <span class="marquee-item blue">HTML/CSS</span>
                 <span class="marquee-item">THEME CUSTOMIZATION</span>
                 <span class="marquee-item">SHOPIFY DEVELOPER</span>
-                <span class="marquee-item red">UX / UI</span>
+                <span class="marquee-item blue">UX / UI</span>
                 <span class="marquee-item">LIQUID</span>
-                <span class="marquee-item red">HTML/CSS</span>
+                <span class="marquee-item blue">HTML/CSS</span>
                 <span class="marquee-item">THEME CUSTOMIZATION</span>
             </div>
         </div>
@@ -941,6 +981,8 @@
             <div class="job-item">• Shopify Design & Development</div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- My Work Section -->
     <section class="work-section" id="work">
@@ -994,6 +1036,8 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <!-- My Skills Section -->
     <section class="skills-section" id="skills">
         <div class="section-header">
@@ -1015,6 +1059,8 @@
             <div class="skill-item">• GitHub</div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- FAQ Section -->
     <section class="faq-section" id="faq">
@@ -1082,7 +1128,7 @@
                 </p>
                 <div class="modal-media">
                     <video controls>
-                        <source src="https://cdn.shopify.com/videos/c/o/v/dde3aac7b8b8434da1c1a6a5e4f0ee7d.mp4">
+                        <source src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_131815.png?v=1785230559" type="video/mp4">
                     </video>
                     <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_131815.png?v=1785230559" alt="Project Image 1">
                     <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_131732.png?v=1785230558" alt="Project Image 2">
@@ -1166,6 +1212,41 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // Section reveal animation on scroll
+        const sections = document.querySelectorAll('section');
+        const dividers = document.querySelectorAll('.section-divider');
+
+        sections.forEach((section) => {
+            gsap.to(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power3.out',
+                onComplete: () => section.classList.add('visible')
+            });
+        });
+
+        // Divider animation
+        dividers.forEach((divider) => {
+            gsap.to(divider, {
+                scrollTrigger: {
+                    trigger: divider,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                scaleX: 1,
+                duration: 1.2,
+                ease: 'power2.inOut',
+                onComplete: () => divider.classList.add('visible')
+            });
         });
 
         // Animate job items on scroll
