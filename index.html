@@ -19,7 +19,7 @@
             --text-color: #ffffff;
             --accent-red: #ff2a00; 
             --gray-dark: #1a1a1a;
-            --gray-light: #888888;
+            --gray-light: #aaaaaa;
         }
 
         * {
@@ -121,7 +121,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Hero Section with Fluid Animation */
+        /* Hero Section with Floating Blobs Animation */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -145,75 +145,61 @@
             background: var(--bg-color);
         }
 
+        /* Vivid Motion Style Blobs */
         .fluid-blob {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            mix-blend-mode: screen;
+            filter: blur(60px);
+            opacity: 0.8;
+            mix-blend-mode: screen; /* Key for the glowing effect */
+            animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
         }
 
         .blob-1 {
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, var(--accent-red) 0%, #cc2200 50%, transparent 100%);
-            top: -200px;
-            left: -200px;
-            animation: fluidMove1 25s infinite ease-in-out;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, #ff2a00 0%, #cc0000 40%, transparent 70%);
+            top: -10%;
+            left: -10%;
+            animation: floatBlob1 20s infinite alternate;
         }
 
         .blob-2 {
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, #ff5e00 0%, var(--accent-red) 50%, transparent 100%);
-            top: 40%;
-            right: -150px;
-            animation: fluidMove2 30s infinite ease-in-out;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, #ff5e00 0%, #ff2a00 40%, transparent 70%);
+            bottom: -10%;
+            right: -10%;
+            animation: floatBlob2 25s infinite alternate;
         }
 
         .blob-3 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #991a00 0%, var(--accent-red) 60%, transparent 100%);
-            bottom: -100px;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, #ff004c 0%, #99001a 40%, transparent 70%);
+            top: 40%;
             left: 30%;
-            animation: fluidMove3 28s infinite ease-in-out;
+            animation: floatBlob3 22s infinite alternate;
         }
 
-        .blob-4 {
-            width: 650px;
-            height: 650px;
-            background: radial-gradient(circle, #ff4d00 0%, #991a00 50%, transparent 100%);
-            top: 20%;
-            left: 40%;
-            animation: fluidMove4 35s infinite ease-in-out;
+        @keyframes floatBlob1 {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(15%, 10%) scale(1.1) rotate(15deg); }
+            66% { transform: translate(-5%, 20%) scale(0.9) rotate(-10deg); }
+            100% { transform: translate(10%, -5%) scale(1.05) rotate(5deg); }
         }
 
-        @keyframes fluidMove1 {
-            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            25% { transform: translate(100px, 150px) scale(1.2) rotate(90deg); }
-            50% { transform: translate(200px, 50px) scale(0.9) rotate(180deg); }
-            75% { transform: translate(50px, 200px) scale(1.1) rotate(270deg); }
+        @keyframes floatBlob2 {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(-20%, -15%) scale(1.2) rotate(-20deg); }
+            66% { transform: translate(10%, -10%) scale(0.95) rotate(10deg); }
+            100% { transform: translate(-10%, 10%) scale(1.1) rotate(-5deg); }
         }
-        @keyframes fluidMove2 {
-            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            33% { transform: translate(-150px, 100px) scale(1.15) rotate(120deg); }
-            66% { transform: translate(-50px, -150px) scale(0.95) rotate(240deg); }
-        }
-        @keyframes fluidMove3 {
-            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            20% { transform: translate(80px, -120px) scale(1.1) rotate(72deg); }
-            40% { transform: translate(150px, 80px) scale(0.95) rotate(144deg); }
-            60% { transform: translate(-100px, 150px) scale(1.05) rotate(216deg); }
-            80% { transform: translate(-150px, -50px) scale(1) rotate(288deg); }
-        }
-        @keyframes fluidMove4 {
-            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            16.67% { transform: translate(120px, 80px) scale(1.1) rotate(60deg); }
-            33.33% { transform: translate(60px, -120px) scale(0.95) rotate(120deg); }
-            50% { transform: translate(-100px, -60px) scale(1.05) rotate(180deg); }
-            66.67% { transform: translate(-80px, 100px) scale(1) rotate(240deg); }
-            83.33% { transform: translate(100px, 50px) scale(1.08) rotate(300deg); }
+
+        @keyframes floatBlob3 {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(20%, -20%) scale(1.3) rotate(30deg); }
+            100% { transform: translate(-15%, 15%) scale(0.9) rotate(-15deg); }
         }
 
         .hero-content {
@@ -224,7 +210,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-size: clamp(3rem, 7vw, 6rem);
             line-height: 1.1;
             margin-bottom: 1.5rem;
             color: var(--text-color);
@@ -235,7 +221,7 @@
         }
 
         .hero-subtext {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
             color: var(--accent-red);
             margin-bottom: 3rem;
             font-weight: 400;
@@ -245,14 +231,69 @@
             text-align: center;
         }
 
+        /* Shining Button Style */
+        .collab-btn-container {
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .shining-btn {
+            position: relative;
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            background: var(--accent-red);
+            border: none;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(255, 42, 0, 0.4);
+        }
+
+        .shining-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+        }
+
+        .shining-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 42, 0, 0.7);
+            background: #ff4d29;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
         .hero-traits {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
-            margin-bottom: 4rem;
+            margin-top: 4rem;
             opacity: 0;
-            animation: fadeIn 1s ease 0.4s forwards;
+            animation: fadeIn 1s ease 0.6s forwards;
         }
 
         .trait {
@@ -338,34 +379,36 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* General Section Styles */
+        /* General Section Styles - IMPROVED READABILITY */
         section {
-            padding: 100px 5%;
+            padding: 120px 5%;
             position: relative;
             background: var(--bg-color);
         }
 
         .section-header {
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
             text-align: center;
         }
 
         .section-header h2 {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            margin-bottom: 1rem;
+            font-size: clamp(2.5rem, 5vw, 4.5rem); /* Larger Title */
+            margin-bottom: 1.5rem;
             color: var(--text-color);
             text-align: center;
+            letter-spacing: -0.02em;
         }
 
         .section-header p {
-            font-size: 1.2rem;
-            color: var(--accent-red);
-            max-width: 600px;
+            font-size: 1.4rem; /* Larger Subtext */
+            color: var(--gray-light);
+            max-width: 700px;
             margin: 0 auto;
             text-align: center;
+            font-weight: 400;
         }
 
-        /* Jobs to Target Section */
+        /* Jobs to Target Section - IMPROVED READABILITY */
         .jobs-section {
             background: var(--bg-color);
             color: var(--text-color);
@@ -376,31 +419,32 @@
         .jobs-list {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            max-width: 800px;
+            gap: 2rem;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .job-item {
-            padding: 2rem;
+            padding: 2.5rem;
             background: rgba(255, 255, 255, 0.05);
-            border-left: 4px solid var(--accent-red);
-            border-radius: 8px;
-            font-size: 1.3rem;
-            font-weight: 500;
+            border-left: 5px solid var(--accent-red);
+            border-radius: 12px;
+            font-size: 1.6rem; /* Much Larger Text */
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.4s ease;
             opacity: 0;
             transform: translateX(-50px);
             color: var(--text-color);
             text-align: center;
+            letter-spacing: -0.01em;
         }
 
         .job-item:hover {
-            background: rgba(255, 42, 0, 0.2);
-            padding-left: 3rem;
+            background: rgba(255, 42, 0, 0.15);
+            padding-left: 3.5rem;
             transform: translateX(10px);
-            box-shadow: 0 5px 20px rgba(255, 42, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(255, 42, 0, 0.2);
         }
 
         .job-item.visible {
@@ -409,11 +453,11 @@
         }
 
         /* =========================================
-           HORIZONTAL SCROLL WORK SECTION (ZARA STYLE)
+           HORIZONTAL SCROLL WORK SECTION
            ========================================= */
         .work-wrapper {
             width: 100%;
-            height: 100vh; /* Full viewport height for pinning */
+            height: 100vh;
             overflow: hidden;
             display: flex;
             background: var(--bg-color);
@@ -423,7 +467,7 @@
         .work-track {
             display: flex;
             height: 100%;
-            width: 300vw; /* 3 projects * 100vw */
+            width: 300vw;
         }
 
         .project-slide {
@@ -436,6 +480,12 @@
             padding: 0 5%;
             position: relative;
             border-right: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .project-slide:hover {
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .slide-content {
@@ -482,9 +532,10 @@
         }
 
         .slide-title {
-            font-size: 2.5rem;
+            font-size: 2.8rem; /* Larger Title */
             margin-bottom: 1.5rem;
             color: var(--text-color);
+            line-height: 1.2;
         }
 
         .slide-tags {
@@ -495,12 +546,12 @@
         }
 
         .tag {
-            padding: 0.5rem 1.2rem;
+            padding: 0.6rem 1.4rem;
             background: var(--accent-red);
             color: var(--text-color);
             border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 1rem;
+            font-weight: 600;
         }
 
         /* =========================================
@@ -520,7 +571,6 @@
             padding: 40px 0;
         }
 
-        /* The Vertical Line Background */
         .roadmap-line-bg {
             position: absolute;
             left: 50%;
@@ -532,13 +582,12 @@
             z-index: 1;
         }
 
-        /* The Animated Red Progress Line */
         .roadmap-line-fill {
             position: absolute;
             left: 50%;
             top: 0;
             width: 2px;
-            height: 0%; /* Animated via GSAP */
+            height: 0%;
             background: var(--accent-red);
             transform: translateX(-50%);
             z-index: 2;
@@ -553,7 +602,7 @@
             align-items: center;
             margin-bottom: 80px;
             z-index: 3;
-            opacity: 0.3; /* Dimmed by default */
+            opacity: 0.3;
             transition: opacity 0.5s ease;
         }
 
@@ -561,7 +610,6 @@
             opacity: 1;
         }
 
-        /* The Dot on the line */
         .node-dot {
             width: 24px;
             height: 24px;
@@ -586,7 +634,7 @@
             width: 42%;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 12px;
             backdrop-filter: blur(5px);
             transition: all 0.5s ease;
@@ -599,7 +647,6 @@
             background: rgba(255, 42, 0, 0.05);
         }
 
-        /* Alternating Layout */
         .skill-node:nth-child(odd) { justify-content: flex-start; }
         .skill-node:nth-child(odd) .skill-card { margin-right: auto; text-align: right; }
         
@@ -607,14 +654,15 @@
         .skill-node:nth-child(even) .skill-card { margin-left: auto; text-align: left; }
 
         .skill-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem; /* Larger Title */
+            margin-bottom: 0.8rem;
             color: var(--text-color);
         }
 
         .skill-desc {
-            font-size: 1rem;
+            font-size: 1.1rem; /* Larger Desc */
             color: var(--gray-light);
+            line-height: 1.6;
         }
 
         /* Modal Styles */
@@ -684,7 +732,7 @@
         }
 
         .modal-description {
-            font-size: 1.1rem;
+            font-size: 1.2rem; /* Larger Modal Text */
             line-height: 1.8;
             margin-bottom: 2rem;
             color: var(--text-color);
@@ -749,7 +797,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 1.2rem;
+            font-size: 1.4rem; /* Larger FAQ Text */
             font-weight: 600;
             transition: all 0.3s ease;
             color: var(--text-color);
@@ -810,6 +858,7 @@
             color: var(--text-color);
             opacity: 0.9;
             text-align: center;
+            font-size: 1.1rem;
         }
 
         /* Footer */
@@ -838,20 +887,18 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu { display: flex; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.8rem; }
             .hero-traits { gap: 1rem; }
             .trait { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
             .marquee-item { font-size: 1.2rem; }
-            section { padding: 60px 5%; }
+            section { padding: 80px 5%; }
             
-            /* Horizontal Scroll Mobile Adjustment */
             .slide-content { flex-direction: column; gap: 2rem; }
             .slide-image-box { height: 30vh; width: 100%; }
             .slide-info { text-align: center; }
             .slide-number { font-size: 4rem; }
             .slide-tags { justify-content: center; }
             
-            /* Roadmap Mobile Adjustment */
             .roadmap-line-bg, .roadmap-line-fill { left: 20px; }
             .node-dot { left: 20px; }
             .skill-node { justify-content: flex-start !important; padding-left: 50px; }
@@ -859,8 +906,8 @@
             
             .modal-body { padding: 2rem 1.5rem; }
             .modal-title { font-size: 1.8rem; }
-            .faq-question { font-size: 1rem; padding: 1.5rem; }
-            .fluid-blob { filter: blur(60px); }
+            .faq-question { font-size: 1.2rem; padding: 1.5rem; }
+            .fluid-blob { filter: blur(40px); }
         }
 
         /* Scrollbar */
@@ -895,12 +942,19 @@
             <div class="fluid-blob blob-1"></div>
             <div class="fluid-blob blob-2"></div>
             <div class="fluid-blob blob-3"></div>
-            <div class="fluid-blob blob-4"></div>
         </div>
         
         <div class="hero-content">
             <h1>SHOPIFY DEVELOPER<br>AND NOT ONLY</h1>
             <p class="hero-subtext">Shopify is just the foundation. I build ecosystems on it.</p>
+            
+            <!-- NEW SHINING BUTTON -->
+            <div class="collab-btn-container">
+                <a href="https://www.upwork.com/freelancers/~01a41cf557a7ca45c6?mp_source=share" target="_blank" class="shining-btn">
+                    LET'S COLLABORATE
+                </a>
+            </div>
+
             <div class="hero-traits">
                 <div class="trait"><span>Creative</span></div>
                 <div class="trait"><span>Reliable</span></div>
@@ -963,7 +1017,7 @@
         <div class="work-track">
             
             <!-- Project 1 -->
-            <div class="project-slide">
+            <div class="project-slide" onclick="openModal('modal1')">
                 <div class="slide-content">
                     <div class="slide-image-box">
                         <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_125203.png?v=1785228910" alt="Luxury Furniture Store" class="slide-image">
@@ -982,7 +1036,7 @@
             </div>
 
             <!-- Project 2 -->
-            <div class="project-slide">
+            <div class="project-slide" onclick="openModal('modal2')">
                 <div class="slide-content">
                     <div class="slide-image-box">
                         <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_133305.png?v=1785231498" alt="Landing Page" class="slide-image">
@@ -1000,7 +1054,7 @@
             </div>
 
             <!-- Project 3 -->
-            <div class="project-slide">
+            <div class="project-slide" onclick="openModal('modal3')">
                 <div class="slide-content">
                     <div class="slide-image-box">
                         <img src="https://cdn.shopify.com/s/files/1/0694/4053/6660/files/2026-07-28_135924.png?v=1785232889" alt="GitHub Pages Site" class="slide-image">
@@ -1250,7 +1304,6 @@
         const roadmapLineFill = document.querySelector(".roadmap-line-fill");
         const skillNodes = document.querySelectorAll(".skill-node");
 
-        // Create a timeline that scrubs with scroll
         let tl = gsap.timeline({
             scrollTrigger: {
                 trigger: ".roadmap-container",
@@ -1260,17 +1313,13 @@
             }
         });
 
-        // 1. Animate the red line growing downwards
         tl.to(roadmapLineFill, {
             height: "100%",
             ease: "none"
-        }, 0); // Start at time 0
+        }, 0);
 
-        // 2. Animate each node unlocking sequentially
         skillNodes.forEach((node, index) => {
-            // Calculate position based on total nodes
             const position = (index / skillNodes.length); 
-            
             tl.to(node, {
                 className: "skill-node active",
                 duration: 0.1,
