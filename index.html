@@ -117,7 +117,84 @@
         }
 
         /* Hero Section */
-        .hero {
+        .hero /* Animated Background Blobs */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    background: var(--deep-blue);
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: float 20s infinite ease-in-out;
+}
+
+.blob-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(45, 80, 140, 0.8) 0%, rgba(27, 42, 74, 0.4) 100%);
+    top: -200px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(60, 100, 160, 0.7) 0%, rgba(27, 42, 74, 0.3) 100%);
+    top: 50%;
+    right: -150px;
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(40, 70, 120, 0.8) 0%, rgba(27, 42, 74, 0.5) 100%);
+    bottom: -150px;
+    left: 30%;
+    animation-delay: -10s;
+}
+
+.blob-4 {
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(50, 90, 150, 0.6) 0%, rgba(27, 42, 74, 0.4) 100%);
+    top: 30%;
+    left: 20%;
+    animation-delay: -15s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    25% {
+        transform: translate(50px, -50px) scale(1.1) rotate(90deg);
+    }
+    50% {
+        transform: translate(-30px, 30px) scale(0.9) rotate(180deg);
+    }
+    75% {
+        transform: translate(40px, 20px) scale(1.05) rotate(270deg);
+    }
+}
+
+/* Update hero content z-index to be above background */
+.hero-content {
+    text-align: center;
+    max-width: 1200px;
+    z-index: 2;
+    position: relative;
+}{
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -727,7 +804,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero" id="home"> <!-- Add these animated background elements -->
+<div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+</div>
         <div class="hero-content">
             <h1>SHOPIFY DEVELOPER<br>AND NOT ONLY</h1>
             <p class="hero-subtext">Shopify is just the foundation. I build ecosystems on it.</p>
